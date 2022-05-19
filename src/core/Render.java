@@ -73,6 +73,7 @@ public class Render extends JPanel {
 
 	public enum Mode {Wireframe, Panelled};
 	public static Screen s;
+	public static Rasterer r;
 	public Perspective p;
 	public static IO io;
 	public static Animations a;
@@ -721,6 +722,7 @@ public class Render extends JPanel {
 		Render.a = new Animations(this);
 		Render.painter = new Painter(this);
 		Render.aM = new AudioManager(this);
+		Render.r = new Rasterer(this);
 		pBActive = false;
 
 		addKeyListener(io);

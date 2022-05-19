@@ -2,11 +2,11 @@ package objects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import core.Layer;
-import core.Vec3;
 import core.Render;
+import core.Vec3;
 import particlesystems.ParticleSystem;
 import perspectives.Perspective;
 import textures.Texture;
@@ -131,7 +131,7 @@ public abstract class PlanarRoot {
 	}
 
 	public abstract void draw2D(Graphics2D g, Perspective p);
-	public abstract void draw3D(Graphics2D g, Perspective p);
+	public abstract void draw3D(Graphics2D g, BufferedImage b, Perspective p);
 
 	public void select() {selected = true;}
 	public void deselect() {selected = false;}

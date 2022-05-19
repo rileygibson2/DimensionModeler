@@ -5,13 +5,14 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.GeneralPath;
+import java.awt.image.BufferedImage;
 
 import core.Layer;
 import core.Layer.Visibility;
 import core.LightSource;
-import core.Vec3;
 import core.Render;
 import core.Render.Mode;
+import core.Vec3;
 import perspectives.Perspective;
 
 public class Polygon extends PlanarRoot {
@@ -71,7 +72,7 @@ public class Polygon extends PlanarRoot {
 	 */
 
 	@Override
-	public void draw3D(Graphics2D g, Perspective p) {
+	public void draw3D(Graphics2D g, BufferedImage b, Perspective p) {
 		calculateColor();
 
 		//Centering variables
@@ -111,6 +112,12 @@ public class Polygon extends PlanarRoot {
 			if (layer.getVisibility()==Visibility.Greyed) g.setColor(new Color(150, 150, 150, 40));
 			else g.setColor(col);
 			g.fill(gP);
+			
+			/*RasterPolygon rP = new RasterPolygon();
+			rP.add(new Point(oX+po[0].x, oY+po[0].y));
+			rP.add(new Point(oX+po[1].x, oY+po[1].y));
+			rP.add(new Point(oX+po[2].x, oY+po[2].y));
+			Render.r.drawRasterPolygon(b, col, rP);*/
 		}
 	}
 

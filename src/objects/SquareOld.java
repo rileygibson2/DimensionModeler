@@ -4,8 +4,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.geom.GeneralPath;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +64,7 @@ public class SquareOld extends PlanarRoot {
 	 */
 
 	@Override
-	public void draw3D(Graphics2D g, Perspective p) {
+	public void draw3D(Graphics2D g, BufferedImage b, Perspective p) {
 		//Centering variables
 		int oX = Render.sW/2+p.xOffset;
 		int oY = Render.sH/2+p.yOffset;

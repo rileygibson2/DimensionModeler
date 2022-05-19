@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
@@ -79,7 +80,9 @@ public class Screen {
 		}
 		if (showAxisMarkings && c.p instanceof V3D) drawAxisMarkings(g);
 
-		drawObjects(g);
+		//BufferedImage b = new BufferedImage(Render.sW, Render.sH, BufferedImage.TYPE_INT_RGB);
+		drawObjects(null, g);
+		//g.drawImage(b, 0, 0, null);
 		if (showParticles && c.p instanceof V3D) drawParticleSystems(g);
 		if (showAxisMarkings && c.p instanceof V3D) drawCircle(g);
 
@@ -330,12 +333,12 @@ public class Screen {
 	 * 
 	 * @param g - the current Graphics2D object
 	 */
-	public void drawObjects(Graphics2D g) {
-		for (PlanarRoot o : c.sortObjects()) {
-			if (o.layer.isVisible() && c.masterLayer.isVisible()) {
-				if (o.isSystemIndicator) {
+	public void drawObjects(BufferedImage b, Graphics2D g) {
+		for (PlanarRoot p : c.sortObjects()) {
+			if (p.layer.isVisible() && c.masterLayer.isVisible()) {
+				if (p.isSystemIndicator) {
 					for (ParticleSystem s : c.systems) {
-						if (s==o.system) {
+						if (s==p.system) {
 							if (s.isRunning()&&showParticles&&c.p instanceof V3D) {
 								try {s.draw(g);} catch (ConcurrentModificationException c) {}
 							}
@@ -344,9 +347,9 @@ public class Screen {
 					}
 				}
 				else {
-					if (c.p instanceof V3D) o.draw3D(g, c.p);
-					else o.draw2D(g, c.p);
-					c.calculateObjectDistance(o); //For linking
+					if (c.p instanceof V3D) p.draw3D(g, b, c.p);
+					else p.draw2D(g, c.p);
+					c.calculateObjectDistance(p); //For linking
 				}
 			}
 		}
